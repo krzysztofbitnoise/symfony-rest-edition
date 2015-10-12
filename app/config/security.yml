@@ -8,19 +8,31 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        in_memory:
-            memory:
-                users:
-                    restapi:  { password: secretpw, roles: [ 'ROLE_API' ] }
+        # in_memory:
+        #     memory:
+        #         users:
+        #             restapi:  { password: secretpw, roles: [ 'ROLE_API' ] }
+        carddav:
+            entity: { class: CardDavBundle:CardDavUser, property: username }
 
     firewalls:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        main:
+        # main:
+        #     pattern: ^/
+        #     anonymous: ~
+        #     stateless:  true
+        #     http_basic:
+        #         realm: "Demo REST API (username: restapi, password: secretpw)"
+        secured_area:
             pattern: ^/
             anonymous: ~
-            stateless:  true
-            http_basic:
-                realm: "Demo REST API (username: restapi, password: secretpw)"
+            provider: carddav
+            logout: ~
+
+    encoders:
+        CardDavBundle\Entity\CardDavUser:
+            algorithm: bcrypt
+            cost: 12

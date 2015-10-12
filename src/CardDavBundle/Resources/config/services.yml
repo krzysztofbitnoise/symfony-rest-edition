@@ -1,0 +1,22 @@
+#services for carddav
+services:
+    carddav.basic_auth:
+        class:     CardDavBundle\DAV\Auth\Backend\BasicAuth
+        arguments: [@security.user.provider.concrete.carddav]
+
+    carddav.carddavlist_backend:
+        class: CardDavBundle\CardDAV\Backend\CardDavList
+        arguments: [@doctrine.orm.default_entity_manager]
+
+    carddav.carddavuser_backend:
+        class: CardDavBundle\DAVACL\PrincipalBackend\CardDavUser
+        arguments: [@doctrine.orm.default_entity_manager]
+
+    carddav.plugin.contact:
+        class: CardDavBundle\CardDAV\UpdateContactPlugin
+        arguments: [@doctrine.orm.default_entity_manager]
+
+    contact.post_persist:
+        class: CardDavBundle\Listener\PostPersistListener
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }

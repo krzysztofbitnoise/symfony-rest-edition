@@ -1,0 +1,11 @@
+# CardDav
+carddav_wellknown:
+    pattern:  /.well-known/{service}
+    defaults: { _controller: CardDavBundle:WellKnown:index }
+
+carddav_server:
+    path: /{slug}
+    defaults: { _controller: CardDavBundle:CardDav:index, slug: null }
+    requirements:
+        slug: ".*"
+

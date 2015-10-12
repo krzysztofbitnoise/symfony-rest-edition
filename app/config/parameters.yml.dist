@@ -13,3 +13,6 @@ parameters:
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    carddav_debug:     false
+    carddav_browser:   false

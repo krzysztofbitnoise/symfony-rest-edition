@@ -1,3 +1,8 @@
-NelmioApiDocBundle:
-  resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
-  prefix:   /api/doc
+carddav:
+    resource: "@CardDavBundle/Resources/config/routing.yml"
+    prefix:   /
+
+# NelmioApiDocBundle:
+#   resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+#   prefix:   /api/doc
+
